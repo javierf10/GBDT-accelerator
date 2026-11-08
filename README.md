@@ -13,34 +13,34 @@ The system processes an $8 \times 16$-bit input vector and computes the output b
 ### Key Features:
 * **Input:** $8 \times 16$-bit vector.
 * **Control:** Synchronization via `start` (begins processing) and `done` (indicates completion) signals.
-* **Storage:** Internal $128 \times 16$-bit ROM memory initialized with tree node data[cite: 1].
+* **Storage:** Internal $128 \times 16$-bit ROM memory initialized with tree node data.
 
 ---
 
 ## ROM Memory Format (Nodes)
 
-The $16$-bit entries in the ROM use different structures depending on the node type[cite: 1]:
+The $16$-bit entries in the ROM use different structures depending on the node type:
 
 ### Branch Nodes (bit 15 = `0` / comparison):
-* **Bit 15:** Node type (`0` for branch node)[cite: 1].
-* **Bits 14–12:** Index of the input feature to compare ($0$ to $7$)[cite: 1].
-* **Bits 11–8:** Offset to the right child node[cite: 1].
-* **Bits 7–0:** Reference value for comparison[cite: 1].
+* **Bit 15:** Node type (`0` for branch node).
+* **Bits 14–12:** Index of the input feature to compare ($0$ to $7$).
+* **Bits 11–8:** Offset to the right child node.
+* **Bits 7–0:** Reference value for comparison.
 
 ### Leaf Nodes (bit 15 = `1` / result):
-* **Bit 15:** Node type (`1` for leaf node)[cite: 1].
+* **Bit 15:** Node type (`1` for leaf node).
 * **Bits 14–12:** *Reserved / Unused*.
-* **Bits 11–8:** Offset to the next tree (`1111` indicates the final node/tree to process)[cite: 1].
-* **Bits 7–0:** Output value contributed by the current tree[cite: 1].
+* **Bits 11–8:** Offset to the next tree (`1111` indicates the final node/tree to process).
+* **Bits 7–0:** Output value contributed by the current tree.
 
 ---
 
 ## Repository Structure
 
-* `src/GBDT.vhd`: Top-level entity integrating the datapath and Control Unit (CU)[cite: 1].
-* `src/memoriaROM_128x16.vhd`: Internal ROM pre-loaded with the evaluation trees[cite: 1].
-* `src/reg.vhd`, `src/mux.vhd`, `src/mux2.vhd`, `src/adder8.vhd`, `src/adder16.vhd`: Auxiliary datapath components[cite: 1].
-* `tb/gbdt_test.vhd`: Testbench for functional simulation and verification[cite: 1].
+* `src/GBDT.vhd`: Top-level entity integrating the datapath and Control Unit (CU).
+* `src/memoriaROM_128x16.vhd`: Internal ROM pre-loaded with the evaluation trees.
+* `src/reg.vhd`, `src/mux.vhd`, `src/mux2.vhd`, `src/adder8.vhd`, `src/adder16.vhd`: Auxiliary datapath components.
+* `tb/gbdt_test.vhd`: Testbench for functional simulation and verification.
 
 ---
 
@@ -55,7 +55,7 @@ The $16$-bit entries in the ROM use different structures depending on the node t
    ```bash
    vsim work.gbdt_test
    ```
-3. Test case included in ROM[cite: 1]:
+3. Test case included in ROM:
    * **Entrada de prueba:** `X"A0B1C30E00F10200"`
    * **Salida esperada:** `"11100100"`
    
